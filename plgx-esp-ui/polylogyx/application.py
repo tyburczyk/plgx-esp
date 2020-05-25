@@ -3,6 +3,7 @@ import base64
 import os
 
 from flask import Flask, render_template, current_app, url_for
+from flask_cors import CORS
 
 from polylogyx.blueprints.external_api import blueprint as external_api
 from polylogyx.assets import assets
@@ -30,6 +31,8 @@ def create_app(config=ProdConfig):
     register_extensions(app)
     register_auth_method(app)
     register_filters(app)
+    CORS(app)
+
     return app
 
 

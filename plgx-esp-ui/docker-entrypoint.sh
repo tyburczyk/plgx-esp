@@ -43,7 +43,7 @@ cd /src/plgx-esp-ui
 echo "Starting celery beat..."
 exec `tmux send -t plgx_celery_beat 'celery beat -A polylogyx.worker:celery --schedule=/tmp/celerybeat-schedule --loglevel=INFO --pidfile=/tmp/celerybeaet.pid' ENTER`
 echo "Starting PolyLogyx Vasp osquery fleet manager..."
-exec `tmux send -t plgx "gunicorn --workers=2 --threads=5  -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker --bind 0.0.0.0:5000 --certfile=resources/certificate.crt --keyfile=private.key  manage:app --reload" ENTER`
+exec `tmux send -t plgx "gunicorn --workers=2 --threads=5  -k geventwebsocket.gunicorn.workers.GeventWebSocketWorker --bind 0.0.0.0:5000 --access-logfile /var/log/gunicorn_access.log --certfile=resources/certificate.crt --keyfile=private.key  manage:app --reload" ENTER`
 echo "Starting celery workers..."
 exec `tmux send -t plgx_celery "celery worker -A polylogyx.worker:celery --concurrency=2 -l INFO &" ENTER`
 

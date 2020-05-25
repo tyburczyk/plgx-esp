@@ -30,6 +30,7 @@ flask_socketio==3.3.2
 flask-wtf==0.14.2
 
 Flask-Assets==0.12
+Flask-Cors==3.0.8
 Flask-Caching==1.7.1
 Flask-DebugToolbar==0.10.1
 Flask-Mail==0.9.1

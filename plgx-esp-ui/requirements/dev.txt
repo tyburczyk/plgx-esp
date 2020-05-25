@@ -16,6 +16,7 @@ factory-boy==2.7.0
 fake-factory==0.5.7
 Flask==0.10.1
 Flask-Assets==0.11
+Flask-Cors==3.0.8
 Flask-Bcrypt==0.7.1
 Flask-DebugToolbar==0.10.0
 flask-ldap3-login==0.9.9

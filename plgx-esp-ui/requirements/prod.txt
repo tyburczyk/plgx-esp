@@ -30,6 +30,7 @@ flask-wtf==0.14.2
 
 
 Flask-Assets==0.12
+Flask-Cors==3.0.8
 Flask-DebugToolbar==0.10.1
 Flask-HTTPAuth==3.3.0
 Flask-Mail==0.9.1

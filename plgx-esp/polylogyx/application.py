@@ -11,6 +11,8 @@ from polylogyx.extensions import (
 from polylogyx.settings import ProdConfig
 from polylogyx.tasks import celery
 from flask_caching import Cache
+from flask_cors import CORS
+
 
 def create_app(config=ProdConfig):
     app = Flask(__name__)
@@ -22,6 +24,7 @@ def create_app(config=ProdConfig):
     register_blueprints(app)
     register_loggers(app)
     register_extensions(app)
+    CORS(app)
     # cache.init_app(app)
 
     return app
