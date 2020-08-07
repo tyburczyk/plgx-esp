@@ -16,6 +16,7 @@ from sqlalchemy import and_
 from flask_mail import Message, Mail
 
 from polylogyx.constants import PolyLogyxServerDefaults, DEFAULT_PLATFORMS
+from polylogyx.extensions import auth_client
 
 
 import pkg_resources
@@ -710,10 +711,11 @@ def invalidate_token(loggedin_token):
 def require_api_key(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if User.verify_auth_token(request.headers.environ.get('HTTP_X_ACCESS_TOKEN')) and invalidate_token(request.headers.environ.get('HTTP_X_ACCESS_TOKEN')):
+        # if User.verify_auth_token(request.headers.environ.get('HTTP_X_ACCESS_TOKEN')) and invalidate_token(request.headers.environ.get('HTTP_X_ACCESS_TOKEN')):
+        if auth_client.has_access():
             return f(*args, **kwargs)
         else:
-            current_app.logger.error("%s - Request did not contain valid API key", request.remote_addr)
+            current_app.logger.error("%s - user has no access", request.remote_addr)
             abort(401)
 
         return f(*args, **kwargs)

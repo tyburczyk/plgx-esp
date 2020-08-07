@@ -9,7 +9,7 @@ from polylogyx.blueprints.external_api import blueprint as external_api
 from polylogyx.assets import assets
 from polylogyx.extensions import (
     bcrypt, csrf, db, ldap_manager, login_manager,
-    mail, make_celery, migrate, sentry
+    mail, make_celery, migrate, sentry, auth_client
 )
 from polylogyx.manage import blueprint as backend
 from polylogyx.models import EmailRecipient, Settings
@@ -18,7 +18,6 @@ from polylogyx.tasks import celery
 
 from polylogyx.utils import get_node_health, pretty_field, pretty_operator, jinja2_escapejs_filter, render_column, \
     jinja2_to_json_filter, jinja2_array_to_string_filter, date_diff
-
 
 def create_app(config=ProdConfig):
     app = Flask(__name__)
@@ -53,6 +52,7 @@ def register_extensions(app):
     bcrypt.init_app(app)
     csrf.init_app(app)
     db.init_app(app)
+    auth_client.init_app(app, restrict_access=True)
 
     migrate.init_app(app, db)
     try:
