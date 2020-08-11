@@ -1,0 +1,2446 @@
+{
+  "version": "0.3.14-fixed",
+  "steps": [
+    {
+      "tag": "CreateModel",
+      "model": "alert"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "message",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "query_name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "node_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "rule_id",
+      "type": "Int",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "recon_queries",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "severity",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "result_log_uid",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "source",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "source_data",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "type",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "status",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "node",
+      "type": "node",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "node"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "node"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[node_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "node"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "rule",
+      "type": "rule",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "rule"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "rule"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[rule_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert",
+          "field": "rule"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "alert_email",
+      "type": "alert_email",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert",
+      "field": "distributed_query",
+      "type": "distributed_query",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "alert"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "alert"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"alerts\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "dashboard"
+    },
+    {
+      "tag": "CreateField",
+      "model": "dashboard",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "dashboard",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "dashboard",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "dashboard",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "dashboard",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "dashboard",
+      "field": "updated_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "dashboard",
+      "field": "name",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "dashboard",
+      "field": "data",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "dashboard"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "dashboard"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"dashboard_data\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "default_filter"
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "default_filter",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "default_filter",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "default_filter",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "filters",
+      "type": "Json",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "platform",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "apply_by_default",
+      "type": "Boolean",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "updated_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "default_filter",
+      "field": "arch",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "default_filter"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "default_filter"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"default_filters\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "file_path_tag"
+    },
+    {
+      "tag": "CreateField",
+      "model": "file_path_tag",
+      "field": "tag_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"tag.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "file_path_tag",
+      "field": "file_path_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "file_path_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "file_path_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"file_path.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "file_path_tag",
+      "field": "file_path",
+      "type": "file_path",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "file_path"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "file_path"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[file_path_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "file_path"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "file_path_tag",
+      "field": "tag",
+      "type": "tag",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[tag_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "file_path_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "file_path_tag"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "file_path_tag"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"file_path_tags\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "file_path_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[tag_id, file_path_id]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "file_path_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[file_path_id]"
+            },
+            {
+              "name": "name",
+              "value": "\"ix_file_path_tags_file_path.id\""
+            }
+          ]
+        },
+        "directive": "index"
+      }
+    },
+    {
+      "tag": "CreateModel",
+      "model": "node_detail"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_detail",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_detail",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_detail",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "data",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "node_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "updated_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "node",
+      "type": "node",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_detail",
+          "field": "node"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_detail",
+          "field": "node"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[node_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_detail",
+          "field": "node"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_detail",
+      "field": "node_recon",
+      "type": "node_recon",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_detail"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "node_detail"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"node_data\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "node_recon"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_recon",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_recon",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_recon",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_recon",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_recon",
+      "field": "columns",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_recon",
+      "field": "node_data_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_recon",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_recon",
+      "field": "updated_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_recon",
+      "field": "node_detail",
+      "type": "node_detail",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_recon",
+          "field": "node_detail"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_recon",
+          "field": "node_detail"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[node_data_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_recon",
+          "field": "node_detail"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_recon"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "node_recon"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"node_recon_data\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_recon",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[columns]"
+            },
+            {
+              "name": "name",
+              "value": "\"index_node_recon_data_on_columns\""
+            }
+          ]
+        },
+        "directive": "index"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_recon",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[columns]"
+            },
+            {
+              "name": "name",
+              "value": "\"index_node_recon_data_on_columns_path\""
+            }
+          ]
+        },
+        "directive": "index"
+      }
+    },
+    {
+      "tag": "CreateModel",
+      "model": "node_tag"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_tag",
+      "field": "tag_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"tag.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_tag",
+      "field": "node_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "node_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "node_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"node.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_tag",
+      "field": "node",
+      "type": "node",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "node"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "node"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[node_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "node"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node_tag",
+      "field": "tag",
+      "type": "tag",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[tag_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "node_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_tag"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "node_tag"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"node_tags\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[node_id]"
+            },
+            {
+              "name": "name",
+              "value": "\"ix_node_tags_node.id\""
+            }
+          ]
+        },
+        "directive": "index"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "node_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[node_id, tag_id]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateModel",
+      "model": "option"
+    },
+    {
+      "tag": "CreateField",
+      "model": "option",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "option",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "option",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "option",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "option",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "option",
+      "field": "option",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "option",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "option",
+      "field": "updated_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "option"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "option"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"options\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "pack_tag"
+    },
+    {
+      "tag": "CreateField",
+      "model": "pack_tag",
+      "field": "tag_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"tag.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "pack_tag",
+      "field": "pack_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "pack_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "pack_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"pack.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "pack_tag",
+      "field": "pack",
+      "type": "pack",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "pack"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "pack"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[pack_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "pack"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "pack_tag",
+      "field": "tag",
+      "type": "tag",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[tag_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "pack_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "pack_tag"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "pack_tag"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"pack_tags\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "pack_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[pack_id]"
+            },
+            {
+              "name": "name",
+              "value": "\"ix_pack_tags_pack.id\""
+            }
+          ]
+        },
+        "directive": "index"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "pack_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[pack_id, tag_id]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateModel",
+      "model": "query_pack"
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_pack",
+      "field": "pack_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "pack_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "pack_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"pack.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_pack",
+      "field": "query_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "query_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "query_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"query.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_pack",
+      "field": "pack",
+      "type": "pack",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "pack"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "pack"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[pack_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "pack"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_pack",
+      "field": "query",
+      "type": "query",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "query"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "query"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[query_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_pack",
+          "field": "query"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "query_pack"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "query_pack"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"query_packs\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "query_pack",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[pack_id, query_id]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateModel",
+      "model": "query_tag"
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_tag",
+      "field": "tag_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "tag_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"tag.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_tag",
+      "field": "query_id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "query_id"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "query_id"
+        },
+        "directive": "map"
+      },
+      "argument": "",
+      "value": "\"query.id\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_tag",
+      "field": "query",
+      "type": "query",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "query"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "query"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[query_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "query"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateField",
+      "model": "query_tag",
+      "field": "tag",
+      "type": "tag",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[tag_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "query_tag",
+          "field": "tag"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "query_tag"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "query_tag"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"query_tags\""
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "query_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[query_id]"
+            },
+            {
+              "name": "name",
+              "value": "\"ix_query_tags_query.id\""
+            }
+          ]
+        },
+        "directive": "index"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "query_tag",
+          "arguments": [
+            {
+              "name": "",
+              "value": "[tag_id, query_id]"
+            }
+          ]
+        },
+        "directive": "unique"
+      }
+    },
+    {
+      "tag": "CreateModel",
+      "model": "setting"
+    },
+    {
+      "tag": "CreateField",
+      "model": "setting",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "setting",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "setting",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "setting",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "setting",
+      "field": "name",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "setting",
+      "field": "setting",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateField",
+      "model": "setting",
+      "field": "created_at",
+      "type": "DateTime",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "setting",
+      "field": "updated_at",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "setting"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "setting"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"settings\""
+    },
+    {
+      "tag": "CreateModel",
+      "model": "threat_intel_credential"
+    },
+    {
+      "tag": "CreateField",
+      "model": "threat_intel_credential",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "threat_intel_credential",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "threat_intel_credential",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "threat_intel_credential",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateField",
+      "model": "threat_intel_credential",
+      "field": "intel_name",
+      "type": "String",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateField",
+      "model": "threat_intel_credential",
+      "field": "credentials",
+      "type": "Json",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Model",
+          "model": "threat_intel_credential"
+        },
+        "directive": "map"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Model",
+          "model": "threat_intel_credential"
+        },
+        "directive": "map"
+      },
+      "argument": "name",
+      "value": "\"threat_intel_credentials\""
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "alerts"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "dashboard_data"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "default_filters"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "file_path_tags"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "node_data"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "node_recon_data"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "node_tags"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "options"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "pack_tags"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "query_packs"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "query_tags"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "settings"
+    },
+    {
+      "tag": "DeleteModel",
+      "model": "threat_intel_credentials"
+    },
+    {
+      "tag": "CreateField",
+      "model": "alert_email",
+      "field": "alert",
+      "type": "alert",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "alert_email",
+          "field": "alert"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert_email",
+          "field": "alert"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[alert_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "alert_email",
+          "field": "alert"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "alert_email",
+      "field": "alerts"
+    },
+    {
+      "tag": "CreateField",
+      "model": "distributed_query",
+      "field": "alert",
+      "type": "alert",
+      "arity": "Optional"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "distributed_query",
+          "field": "alert"
+        },
+        "directive": "relation"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "distributed_query",
+          "field": "alert"
+        },
+        "directive": "relation"
+      },
+      "argument": "fields",
+      "value": "[alert_id]"
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "distributed_query",
+          "field": "alert"
+        },
+        "directive": "relation"
+      },
+      "argument": "references",
+      "value": "[id]"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "distributed_query",
+      "field": "alerts"
+    },
+    {
+      "tag": "CreateField",
+      "model": "file_path",
+      "field": "file_path_tag",
+      "type": "file_path_tag",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "file_path",
+      "field": "file_path_tags"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node",
+      "field": "alert",
+      "type": "alert",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node",
+      "field": "node_detail",
+      "type": "node_detail",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "node",
+      "field": "node_tag",
+      "type": "node_tag",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "node",
+      "field": "alerts"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "node",
+      "field": "node_data"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "node",
+      "field": "node_tags"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "pack",
+      "field": "pack_tags",
+      "type": "pack_tag"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "pack",
+      "field": "query_packs",
+      "type": "query_pack"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "query",
+      "field": "query_packs",
+      "type": "query_pack"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "query",
+      "field": "query_tags",
+      "type": "query_tag"
+    },
+    {
+      "tag": "CreateField",
+      "model": "rule",
+      "field": "alert",
+      "type": "alert",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "rule",
+      "field": "alerts"
+    },
+    {
+      "tag": "CreateField",
+      "model": "tag",
+      "field": "file_path_tag",
+      "type": "file_path_tag",
+      "arity": "List"
+    },
+    {
+      "tag": "CreateField",
+      "model": "tag",
+      "field": "node_tag",
+      "type": "node_tag",
+      "arity": "List"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "tag",
+      "field": "file_path_tags"
+    },
+    {
+      "tag": "DeleteField",
+      "model": "tag",
+      "field": "node_tags"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "tag",
+      "field": "pack_tags",
+      "type": "pack_tag"
+    },
+    {
+      "tag": "UpdateField",
+      "model": "tag",
+      "field": "query_tags",
+      "type": "query_tag"
+    }
+  ]
+}

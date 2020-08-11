@@ -1,5 +1,15 @@
-version: '3'
+version: "3"
 services:
+  orion:
+    build:
+      context: ./orion/
+      dockerfile: ./Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+    env_file:
+      - .env
   plgx-esp:
     build:
       context: ./
@@ -15,7 +25,7 @@ services:
     environment:
       - POLYLOGYX_ENV=prod
     volumes:
-         - carves:/src/plgx-esp/carves
+      - carves:/src/plgx-esp/carves
     restart: always
     external_links:
       - rabbit1:rabbit1
@@ -37,8 +47,8 @@ services:
       - rabbit1:rabbit1
       - postgres:postgres
     volumes:
-         - carves:/src/plgx-esp-ui/carves
-         - yara:/src/plgx-esp-ui/yara
+      - carves:/src/plgx-esp-ui/carves
+      - yara:/src/plgx-esp-ui/yara
   rabbit1:
     image: rabbitmq:3.6.5-management
     ports:
@@ -59,21 +69,21 @@ services:
     external_links:
       - plgx-esp:plgx-esp
     volumes:
-         - ./nginx:/etc/nginx:ro
-         - ./resources:/resources
-         - yara:/resources/yara
+      - ./nginx:/etc/nginx:ro
+      - ./resources:/resources
+      - yara:/resources/yara
     command: >
-          sh -c "cp /etc/nginx/certificate.crt /resources/
-          && cp /etc/nginx/certificate.crt /resources/windows/x64/
-          && cp /etc/nginx/certificate.crt /resources/windows/x86/
-          && echo $${ENROLL_SECRET}>/resources/secret.txt
-          && echo $${ENROLL_SECRET}>/resources/windows/x64/secret.txt
-          && echo $${ENROLL_SECRET}>/resources/windows/x86/secret.txt
-          && nginx-debug -g 'daemon off;'"
+      sh -c "cp /etc/nginx/certificate.crt /resources/
+      && cp /etc/nginx/certificate.crt /resources/windows/x64/
+      && cp /etc/nginx/certificate.crt /resources/windows/x86/
+      && echo $${ENROLL_SECRET}>/resources/secret.txt
+      && echo $${ENROLL_SECRET}>/resources/windows/x64/secret.txt
+      && echo $${ENROLL_SECRET}>/resources/windows/x86/secret.txt
+      && nginx-debug -g 'daemon off;'"
     restart: always
     ports:
-     - "443:443"
-     - "9000:9000"
+      - "443:443"
+      - "9000:9000"
   postgres:
     image: "postgres:11.1"
     command: postgres -c 'max_connections=500'

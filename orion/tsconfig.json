@@ -1,0 +1,39 @@
+// {
+//   "compilerOptions": {
+//     "plugins": [{ "name": "nexus/typescript-language-service" }],
+//     "target": "es2016",
+//     "module": "commonjs",
+//     "lib": ["esnext"],
+//     "strict": true,
+//     "rootDir": ".",
+//     "noEmit": true,
+//     "typeRoots": ["node_modules/@types", "types"],
+//     "esModuleInterop": true
+//     // "outDir": "/Users/gatz/repos/plgx-esp/plgx-stixql/node_modules/.build",
+//   },
+//   // [1] nexus managed
+//   "include": [".", "types.d.ts"]
+// }
+
+// [1] nexus managed
+//
+// These settings are managed by nexus.
+// Do not edit these manually. Please refer to
+// https://github.com/graphql-nexus/nexus/issues/82
+// Contribute feedback/use-cases if you feel strongly
+// about controlling these settings manually.
+
+{
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "strict": true,
+    "target": "es2018",
+    "module": "commonjs",
+    "lib": ["esnext"],
+    "noEmit": true,
+    "typeRoots": ["node_modules/@types", "types"],
+    "rootDir": "api",
+    "plugins": [{ "name": "nexus/typescript-language-service" }]
+  },
+  "include": ["api", "types.d.ts"]
+}

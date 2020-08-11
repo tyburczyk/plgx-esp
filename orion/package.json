@@ -1,0 +1,35 @@
+{
+  "name": "plgx-stixql",
+  "license": "UNLICENSED",
+  "version": "0.0.1",
+  "dependencies": {
+    "got": "^11.5.2",
+    "graphql-type-json": "^0.3.2",
+    "is-ip": "^3.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "nexus": "^0.26.1",
+    "nexus-plugin-prisma": "^0.17.0",
+    "uuid": "7.0.0"
+  },
+  "scripts": {
+    "format": "npx prettier --write './**/*.{ts,md}'",
+    "dev": "nexus dev",
+    "build": "nexus build",
+    "start": "node .nexus/build/api",
+    "db:migrate:schema": "prisma migrate save --experimental",
+    "db:studio": "npx @prisma/cli studio --port 4747 --experimental"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "devDependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/uuid": "^8.0.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prefer-let": "^1.0.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  }
+}
