@@ -11,7 +11,7 @@ from raven import Client
 from raven.contrib.celery import register_signal, register_logger_signal
 from raven.contrib.flask import Sentry
 
-
+from polylogyx.auth_client import AuthClient
 
 
 def make_celery(app, celery):
@@ -58,7 +58,7 @@ csrf = CSRFProtect()
 db = SQLAlchemy()
 mail = Mail()
 migrate = Migrate()
-
+auth_client = AuthClient()
 
 ldap_manager = LDAP3LoginManager()
 login_manager = LoginManager()

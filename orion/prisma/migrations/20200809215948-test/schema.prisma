@@ -1,0 +1,482 @@
+generator prisma_client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = "***"
+}
+
+model alembic_version {
+  version_num String @id
+}
+
+model alert_email {
+  id         Int      @default(autoincrement()) @id
+  alert_id   Int
+  status     String?
+  node_id    Int
+  body       String
+  created_at DateTime
+  updated_at DateTime
+  alerts     alerts   @relation(fields: [alert_id], references: [id])
+  node       node     @relation(fields: [node_id], references: [id])
+}
+
+model alerts {
+  id                Int                 @default(autoincrement()) @id
+  message           Json?
+  query_name        String
+  created_at        DateTime
+  node_id           Int
+  rule_id           Int?
+  recon_queries     Json?
+  severity          String?
+  result_log_uid    String?
+  source            String?
+  source_data       Json?
+  type              String?
+  status            String?
+  node              node                @relation(fields: [node_id], references: [id])
+  rule              rule?               @relation(fields: [rule_id], references: [id])
+  alert_email       alert_email[]
+  distributed_query distributed_query[]
+}
+
+model carved_block {
+  id         Int      @default(autoincrement()) @id
+  request_id String
+  session_id String
+  block_id   Int
+  data       String
+  size       Int
+  created_at DateTime
+  updated_at DateTime
+}
+
+model carve_session {
+  id               Int       @default(autoincrement()) @id
+  session_id       String
+  carve_guid       String
+  archive          String?
+  carve_size       Int?
+  block_size       Int?
+  block_count      Int?
+  created_at       DateTime
+  node_id          Int
+  completed_blocks Int?
+  request_id       String?
+  status           String?
+  updated_at       DateTime?
+  node             node      @relation(fields: [node_id], references: [id])
+}
+
+model dashboard_data {
+  id         Int      @default(autoincrement()) @id
+  created_at DateTime
+  updated_at DateTime
+  name       String?
+  data       Json?
+}
+
+model default_filters {
+  id               Int      @default(autoincrement()) @id
+  filters          Json?
+  platform         String
+  apply_by_default Boolean
+  created_at       DateTime
+  updated_at       DateTime
+  arch             String
+}
+
+model default_query {
+  id          Int      @default(autoincrement()) @id
+  name        String
+  sql         String
+  interval    Int?
+  platform    String?
+  version     String?
+  description String?
+  value       String?
+  removed     Boolean
+  shard       Int?
+  status      Boolean
+  snapshot    Boolean?
+  arch        String
+}
+
+model distributed_query {
+  id                       Int                        @default(autoincrement()) @id
+  sql                      String
+  timestamp                DateTime?
+  not_before               DateTime?
+  description              String?
+  alert_id                 Int?
+  alerts                   alerts?                    @relation(fields: [alert_id], references: [id])
+  distributed_query_result distributed_query_result[]
+  distributed_query_task   distributed_query_task[]
+}
+
+model distributed_query_result {
+  id                        Int                    @default(autoincrement()) @id
+  columns                   Json?
+  timestamp                 DateTime?
+  distributed_query_id      Int
+  distributed_query_task_id Int
+  distributed_query         distributed_query      @relation(fields: [distributed_query_id], references: [id])
+  distributed_query_task    distributed_query_task @relation(fields: [distributed_query_task_id], references: [id])
+}
+
+model distributed_query_task {
+  id                       Int                        @default(autoincrement()) @id
+  guid                     String                     @unique
+  status                   Int
+  timestamp                DateTime?
+  updated_at               DateTime?
+  viewed_at                DateTime?
+  distributed_query_id     Int
+  sql                      String?
+  save_results_in_db       Boolean
+  node_id                  Int
+  data                     Json?
+  priority                 Int?
+  distributed_query        distributed_query          @relation(fields: [distributed_query_id], references: [id])
+  node                     node                       @relation(fields: [node_id], references: [id])
+  distributed_query_result distributed_query_result[]
+
+  @@index([node_id, status], name: "idx_distributed_query_task_node_id_status")
+}
+
+model email_recipient {
+  id         Int       @default(autoincrement()) @id
+  recipient  String
+  status     String
+  created_at DateTime?
+  updated_at DateTime
+}
+
+model file_path {
+  id             Int              @default(autoincrement()) @id
+  category       String           @unique
+  target_paths   String?
+  file_path_tags file_path_tags[]
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+model file_path_tags {
+  tag_id       Int       @map("tag.id")
+  file_path_id Int       @map("file_path.id")
+  file_path    file_path @relation(fields: [file_path_id], references: [id])
+  tag          tag       @relation(fields: [tag_id], references: [id])
+
+  @@unique([tag_id, file_path_id])
+  @@index([file_path_id], name: "ix_file_path_tags_file_path.id")
+}
+
+model handling_token {
+  id            Int       @default(autoincrement()) @id
+  token         String
+  logged_in_at  DateTime
+  token_expired Boolean
+  logged_out_at DateTime?
+  user          String
+}
+
+model ibm_force_exchange {
+  id             Int      @default(autoincrement()) @id
+  search_term    String
+  comment        String?
+  malware_family String?
+  created_at     DateTime
+  risk           String?
+}
+
+model ioc_intel {
+  id          Int      @default(autoincrement()) @id
+  type        String
+  value       String?
+  threat_name String?
+  intel_type  String
+  severity    String
+  created_at  DateTime
+}
+
+model node {
+  id                     Int                      @default(autoincrement()) @id
+  os_info                Json
+  network_info           Json
+  node_key               String                   @unique
+  platform               String?
+  enroll_secret          String?
+  enrolled_on            DateTime?
+  host_identifier        String?
+  last_checkin           DateTime?
+  node_info              Json                     @default("{}")
+  is_active              Boolean                  @default(true)
+  last_ip                String?
+  host_details           Json?
+  last_status            DateTime?
+  last_result            DateTime?
+  last_config            DateTime?
+  last_query_read        DateTime?
+  last_query_write       DateTime?
+  alert_email            alert_email[]
+  alerts                 alerts[]
+  carve_session          carve_session[]
+  distributed_query_task distributed_query_task[]
+  node_data              node_data[]
+  node_email             node_email[]
+  // node_tags           node_tags[]
+  result_log             result_log[]
+  status_log             status_log[]
+  node_tags              node_tags[]
+}
+
+model node_config {
+  id               Int       @default(autoincrement()) @id
+  name             String    @unique
+  type             String?
+  config           String
+  apply_by_default Boolean
+  created_at       DateTime?
+  updated_at       DateTime
+  platform         String?
+}
+
+model node_data {
+  id              Int               @default(autoincrement()) @id
+  name            String
+  data            Json
+  node_id         Int
+  created_at      DateTime
+  updated_at      DateTime
+  node            node              @relation(fields: [node_id], references: [id])
+  node_recon_data node_recon_data[]
+}
+
+model node_email {
+  id                 Int      @default(autoincrement()) @id
+  email_id           String
+  status             String?
+  node_id            Int
+  email_verified     Boolean
+  verification_token String
+  created_at         DateTime
+  updated_at         DateTime
+  node               node     @relation(fields: [node_id], references: [id])
+}
+
+model node_recon_data {
+  id           Int       @default(autoincrement()) @id
+  columns      Json
+  node_data_id Int
+  created_at   DateTime
+  updated_at   DateTime
+  node_data    node_data @relation(fields: [node_data_id], references: [id])
+
+  @@index([columns], name: "index_node_recon_data_on_columns")
+  @@index([columns], name: "index_node_recon_data_on_columns_path")
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+model node_tags {
+  tag_id  Int  @map("tag.id")
+  node_id Int  @map("node.id")
+  node    node @relation(fields: [node_id], references: [id])
+  tag     tag  @relation(fields: [tag_id], references: [id])
+
+  @@index([node_id], name: "ix_node_tags_node.id")
+  @@unique([node_id, tag_id])
+}
+
+model options {
+  id         Int       @default(autoincrement()) @id
+  name       String
+  option     String
+  created_at DateTime?
+  updated_at DateTime
+}
+
+model pack {
+  id          Int           @default(autoincrement()) @id
+  name        String        @unique
+  platform    String?
+  version     String?
+  description String?
+  shard       Int?
+  category    String?
+  // pack_tags   pack_tags[]
+  // query_packs query_packs[]
+  pack_tags   pack_tags[]
+  query_packs query_packs[]
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+model pack_tags {
+  tag_id  Int  @map("tag.id")
+  pack_id Int  @map("pack.id")
+  pack    pack @relation(fields: [pack_id], references: [id])
+  tag     tag  @relation(fields: [tag_id], references: [id])
+
+  @@index([pack_id], name: "ix_pack_tags_pack.id")
+  @@unique([pack_id, tag_id])
+}
+
+model phish_tank {
+  id         Int      @default(autoincrement()) @id
+  phish_id   String
+  verified   String?
+  url        String
+  online     String?
+  target     String?
+  created_at DateTime
+  updated_at DateTime
+}
+
+model query {
+  id          Int           @default(autoincrement()) @id
+  name        String
+  sql         String
+  interval    Int?
+  platform    String?
+  version     String?
+  description String?
+  value       String?
+  removed     Boolean
+  shard       Int?
+  snapshot    Boolean?
+  // query_packs query_packs[]
+  // query_tags  query_tags[]
+  query_packs query_packs[]
+  query_tags  query_tags[]
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+model query_packs {
+  pack_id  Int   @map("pack.id")
+  query_id Int   @map("query.id")
+  pack     pack  @relation(fields: [pack_id], references: [id])
+  query    query @relation(fields: [query_id], references: [id])
+
+  @@unique([pack_id, query_id])
+}
+
+// The underlying table does not contain a valid unique identifier and can therefore currently not be handled.
+model query_tags {
+  tag_id   Int   @map("tag.id")
+  query_id Int   @map("query.id")
+  query    query @relation(fields: [query_id], references: [id])
+  tag      tag   @relation(fields: [tag_id], references: [id])
+
+  @@index([query_id], name: "ix_query_tags_query.id")
+  @@id([tag_id, query_id])
+}
+
+model result_log {
+  id        Int       @default(autoincrement()) @id
+  name      String
+  timestamp DateTime?
+  action    String?
+  columns   Json?
+  node_id   Int
+  uuid      String?
+  status    Int?
+  task_id   String?
+  node      node      @relation(fields: [node_id], references: [id])
+
+  @@index([node_id, timestamp], name: "idx_result_log_node_id_timestamp_desc")
+  @@index([columns], name: "index_result_log_on_columns")
+  @@index([columns], name: "index_result_log_on_columns_path")
+}
+
+model result_log_scan {
+  id          Int      @default(autoincrement()) @id
+  scan_type   String
+  scan_value  String?
+  reputations Json
+  created_at  DateTime
+}
+
+model rule {
+  id            Int      @default(autoincrement()) @id
+  name          String
+  status        String?
+  alerters      String[]
+  conditions    Json?
+  description   String?
+  updated_at    DateTime @default(now())
+  recon_queries Json?
+  severity      String?
+  tactics       String[]
+  technique_id  String?
+  type          String?
+  alerts        alerts[]
+}
+
+model settings {
+  id         Int       @default(autoincrement()) @id
+  name       String
+  setting    String
+  created_at DateTime?
+  updated_at DateTime
+}
+
+model status_log {
+  id       Int       @default(autoincrement()) @id
+  line     Int?
+  message  String?
+  severity Int?
+  filename String?
+  created  DateTime?
+  node_id  Int
+  version  String?
+  node     node      @relation(fields: [node_id], references: [id])
+
+  @@index([node_id, created], name: "idx_status_log_node_id_created_desc")
+}
+
+model tag {
+  id             Int              @default(autoincrement()) @id
+  value          String           @unique
+  file_path_tags file_path_tags[]
+  node_tags      node_tags[]
+  pack_tags      pack_tags[]
+  query_tags     query_tags[]
+}
+
+model threat_intel_credentials {
+  id          Int     @default(autoincrement()) @id
+  intel_name  String?
+  credentials Json
+}
+
+model user {
+  id         Int      @default(autoincrement()) @id
+  username   String   @unique
+  email      String?
+  password   String?
+  created_at DateTime
+  social_id  String?
+  first_name String?
+  last_name  String?
+}
+
+model virus_total {
+  id          Int       @default(autoincrement()) @id
+  search_term String
+  comment     String?
+  response    Int
+  scan_date   DateTime?
+  created_at  DateTime
+  detections  Int?
+  total       Int?
+  permalink   String?
+  avs         String?
+  cves        String?
+}
+
+enum rule_actions {
+  added
+  both
+  removed
+}
