@@ -302,7 +302,7 @@ class Config(object):
     # RAVEN_IGNORE_EXCEPTIONS = []
 
     # TODO: hack auth settings:
-    XDR_AUTH_URL = 'http://host.docker.internal:5001'
+    XDR_URL = 'https://artemis.hack.eiq.sh'
     XDR_AUTH_TOKEN = 'sW5xPvHLAGwSX3rBglWJkshnLoTy2OO9bUBwDOiYvtU'
 
 

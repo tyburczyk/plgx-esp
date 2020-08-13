@@ -18,7 +18,7 @@ class AuthClient:
             AUTH_HEADER_NAME: app.config['XDR_AUTH_TOKEN'],
             'Content-Type': 'application/json'
         }
-        self._auth_uri = app.config['XDR_AUTH_URL']
+        self._auth_uri = app.config['XDR_URL']
 
         # TODO: if using auth is chosen solution, then use this instead of @require_api_key
         # if restrict_access:
