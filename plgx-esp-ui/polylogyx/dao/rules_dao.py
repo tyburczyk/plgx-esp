@@ -19,3 +19,7 @@ def edit_rule_by_id(rule_id,name,alerters,description,conditions,status,updated_
 
 def create_rule_object(name,alerters,description,conditions,status,type_ip,tactics,technique_id,updated_at,recon_queries,severity):
     return Rule(name=name,alerters=alerters,description=description,conditions=conditions,status=status,type=type_ip,tactics=tactics,technique_id=technique_id,updated_at=updated_at,recon_queries=recon_queries,severity=severity)
+
+def delete_rule(rule):
+    db.session.delete(rule)
+    db.session.commit()

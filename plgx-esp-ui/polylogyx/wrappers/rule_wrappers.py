@@ -25,3 +25,10 @@ response_add_rule = Model('rule_add_wrapper', {
     'rule_id': fields.Integer(),
     'message': fields.String(default='rule is added successfully')
 })
+
+response_add_rules = Model('rule_add_wrapper', {
+    'status': fields.String(default="success"),
+    'rule_ids': fields.String(),
+    'message': fields.String(default='rules added successfully'),
+    'deleted_old_rules': fields.Integer()
+})
