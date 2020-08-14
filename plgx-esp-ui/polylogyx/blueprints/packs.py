@@ -69,6 +69,22 @@ class AddPack(Resource):
 
 
 @require_api_key
+@ns.route('/force/add', endpoint = 'pack_force')
+@ns.doc(params={'tags': 'list of tags', 'name':'name of the pack', 'queries':'list of queries', 'category':'category name'})
+class ForceAddPack(Resource):
+    '''adds a new pack to the Pack model. all existing queries with colliding names will be deleted prior to the import.
+    Use with care!'''
+
+    parser = requestparse(['tags','name','queries','category','platform','version','description','shard'],[str, str, dict, str, str, str, str, int],['list of comma separated tags', 'name of the pack', 'dict of queries', 'category', 'platform', 'version', 'description', 'shard'],[False, True, True, False, False, False, False, False])
+
+    @ns.expect(parser)
+    def post(self):
+        args = self.parser.parse_args()  # need to exists for input payload validation
+        pack = add_pack_through_json_data(args, forced=True)
+        return marshal({'pack_id': pack.id}, wrapper.response_add_pack)
+
+
+@require_api_key
 @ns.route('/tag/edit', endpoint = 'add_tag_to_pack')
 @ns.doc(params={'pack_id': 'id of the pack', 'add_tags':'list of tags to add', 'remove_tags':'list of tags to remove'})
 class EditTagsToPack(Resource):

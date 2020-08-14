@@ -221,7 +221,7 @@ def send_alert(node,rule_match,intel_match):
             return False
 
 
-def add_pack_through_json_data(args):
+def add_pack_through_json_data(args, forced=False):
 
     from polylogyx.dao import packs_dao, queries_dao
     from polylogyx.wrappers import parent_wrappers
@@ -249,7 +249,14 @@ def add_pack_through_json_data(args):
                                      q.name, pack.name)
             continue
         else:
-            if q.sql == query['query']:
+            if forced:
+                print(type(q))
+                print(q.__dict__)
+                queries_dao.delete_query(q)
+                # TODO: delete old query somehow
+                q = queries_dao.add_query(query_name, **query)
+                pack.queries.append(q)
+            elif q.sql == query['query']:
                 current_app.logger.debug("Adding existing query %s to pack %s",
                                          q.name, pack.name)
                 pack.queries.append(q)

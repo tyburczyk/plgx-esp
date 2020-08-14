@@ -14,6 +14,10 @@ def get_all_queries():
         db.joinedload(Query.packs, Pack.queries, innerjoin=True)).all()
     return queries
 
+def delete_query(query):
+    db.session.delete(query)
+    db.session.commit()
+
 def get_all_packed_queries():
     queries = Query.query \
         .options(
