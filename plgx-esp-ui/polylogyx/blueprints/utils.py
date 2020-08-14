@@ -250,10 +250,7 @@ def add_pack_through_json_data(args, forced=False):
             continue
         else:
             if forced:
-                print(type(q))
-                print(q.__dict__)
                 queries_dao.delete_query(q)
-                # TODO: delete old query somehow
                 q = queries_dao.add_query(query_name, **query)
                 pack.queries.append(q)
             elif q.sql == query['query']:
