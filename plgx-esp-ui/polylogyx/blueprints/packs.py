@@ -65,6 +65,9 @@ class AddPack(Resource):
     def post(self):
         args = self.parser.parse_args()  # need to exists for input payload validation
         pack = add_pack_through_json_data(args)
+        # TODO: make nicer. This is when query validations inside pack fails:
+        if isinstance(pack, dict):
+            return pack  #  TODO: already marshaled resopnse
         return marshal({'pack_id': pack.id}, wrapper.response_add_pack)
 
 
@@ -81,6 +84,9 @@ class ForceAddPack(Resource):
     def post(self):
         args = self.parser.parse_args()  # need to exists for input payload validation
         pack = add_pack_through_json_data(args, forced=True)
+        # TODO: make nicer. This is when query validations inside pack fails:
+        if isinstance(pack, dict):
+            return pack  # TODO: already marshaled resopnse
         return marshal({'pack_id': pack.id}, wrapper.response_add_pack)
 
 

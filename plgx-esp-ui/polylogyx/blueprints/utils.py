@@ -228,8 +228,10 @@ def add_pack_through_json_data(args, forced=False):
     from polylogyx.utils import create_tags, validate_osquery_query
     from flask_restplus import marshal
 
-    if 'tags' in args: tags = args['tags'].split(',')
-    else: tags=[]
+    if 'tags' in args:
+        tags = args['tags'].split(',')
+    else:
+        tags = []
     name = args['name']
     queries = args['queries']
     pack = packs_dao.get_pack_by_name(name)
@@ -267,10 +269,9 @@ def add_pack_through_json_data(args, forced=False):
         if q in pack.queries:
             continue
 
-    if pack:
-        if tags:
-            pack.tags = create_tags(*tags)
-        pack.save()
+    if tags:
+        pack.tags = create_tags(*tags)
+    pack.save()
     return pack
 
 
