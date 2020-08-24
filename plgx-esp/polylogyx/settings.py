@@ -92,7 +92,7 @@ class Config(object):
         'CREATE TABLE win_file_events(action TEXT, eid TEXT,target_path TEXT, md5 TEXT ,hashed BIGINT,uid TEXT, time BIGINT,utc_time TEXT, pe_file TEXT , pid BIGINT,process_guid TEXT , process_name TEXT);',
         'CREATE TABLE win_process_events(action TEXT, eid TEXT,pid BIGINT,process_guid TEXT , path TEXT ,cmdline TEXT,parent BIGINT, parent_path TEXT,owner_uid TEXT, time BIGINT, utc_time TEXT  );',
 
-        'CREATE TABLE win_process_open_events(action TEXT, eid TEXT,src_pid BIGINT,src_process_guid TEXT ,target_pid BIGINT,target_process_guid TEXT , src_path TEXT , target_path TEXT, granted_access TEXT, owner_uid TEXT, time BIGINT, utc_time TEXT  );',
+        'CREATE TABLE win_process_open_events(action TEXT, eid TEXT,src_pid BIGINT,src_process_guid TEXT ,target_pid BIGINT,target_process_guid TEXT , src_path TEXT , target_path TEXT, granted_access TEXT, granted_access_value TEXT, owner_uid TEXT, time BIGINT, utc_time TEXT  );',
         'CREATE TABLE win_remote_thread_events( eid TEXT,src_pid BIGINT,src_process_guid TEXT ,target_pid BIGINT,target_process_guid TEXT , src_path TEXT ,target_path TEXT,owner_uid TEXT, time BIGINT, utc_time TEXT  );',
 
         'CREATE TABLE win_pefile_events(action TEXT, eid TEXT,target_path TEXT, md5 TEXT ,hashed BIGINT,uid TEXT, pid BIGINT,process_guid TEXT ,process_name TEXT, time BIGINT,utc_time TEXT );',
