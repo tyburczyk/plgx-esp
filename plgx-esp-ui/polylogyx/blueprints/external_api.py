@@ -6,7 +6,7 @@ from flask.json import jsonify
 from flask_restplus import Api
 
 from polylogyx.models import User, HandlingToken
-from polylogyx.blueprints import (nodes,distributed,configs,tags,alerts,packs,queries,schema,rules,carves,yara,iocs,common,email)
+from polylogyx.blueprints import (nodes,distributed,configs,tags,alerts,packs,queries,schema,rules,carves,yara,iocs,common,email,hunting)
 from polylogyx.utils import require_api_key
 from .utils import *
 
@@ -37,6 +37,7 @@ api.add_namespace(iocs.ns)
 api.add_namespace(common.ns)
 api.add_namespace(distributed.ns)
 api.add_namespace(email.ns)
+api.add_namespace(hunting.ns)
 
 def validate_json(f):
     @wraps(f)
