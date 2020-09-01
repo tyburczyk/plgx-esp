@@ -925,7 +925,9 @@ class Alerts(SurrogatePK, Model):
     rule_id = reference_col('rule', nullable=False)
     rule = relationship(
         'Rule',
-        backref=db.backref('alerts', lazy='dynamic'),
+        # TODO: we need related objects. Check if this slows down other functionalities
+        backref=db.backref('alerts'),
+        # backref=db.backref('alerts', lazy='dynamic'),
     )
     severity = Column(db.String, nullable=True)
     type = Column(db.String, nullable=True)

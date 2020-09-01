@@ -1,3 +1,4 @@
+import datetime
 import json
 from sqlalchemy import cast
 
@@ -7,7 +8,7 @@ from flask import request, jsonify
 
 from .utils import *
 from polylogyx.utils import require_api_key
-from polylogyx.models import Alerts
+from polylogyx.models import Alerts, Rule
 from polylogyx.dao import alerts_dao as dao
 from polylogyx.dao import nodes_dao as node_dao
 from polylogyx.dao import rules_dao as rule_dao
@@ -80,3 +81,40 @@ class AlertsData(Resource):
             data = None
         if not data: message="alerts data doesn't exists for the input given"
         return marshal(respcls(message,status,data), parentwrapper.common_response_wrapper,skip_none=True)
+
+
+@require_api_key
+@ns.route('/hunting-pack/<string:pack_id>', endpoint="pack_alerts")
+@ns.doc(params={'host_identifier': 'Host identifier of the Node', 'start_time': 'start time of alerted events', 'end_time': 'end time of alerted events'})
+class PackAlerts(Resource):
+    parser = requestparse(['host_identifier', 'start_time', 'end_time'],
+                          [str, datetime.datetime.fromtimestamp, datetime.datetime.fromtimestamp],
+                          ["host identifier of the node", "start time of alerted events", "end time of alerted events"],
+                          [False, False, False])
+
+    @ns.expect(parser)
+    def post(self, pack_id):
+        args = self.parser.parse_args()
+        # TODO: move it to dao?
+        # TODO: rename in the pack:
+        pack_id = f"hunting-pack--{pack_id}"
+        rules = Rule.query.join(Rule.alerts).filter(Rule.name.startswith(pack_id))
+        # TODO: use some node id + join it
+        if args["host_identifier"]:
+            rules = rules.filter(Alerts.node_id == args["host_identifier"])
+        if args["start_time"]:
+            rules = rules.filter(Alerts.created_at >= args["start_time"])
+        if args["end_time"]:
+            rules = rules.filter(Alerts.created_at <= args["end_time"])
+
+        rules = rules.options(db.contains_eager(Rule.alerts)).all()
+        data = {
+            rule.name: [
+                {
+                    "node_id": alert.node_id
+                }
+                for alert in rule.alerts
+            ] for rule in rules
+        }
+
+        return jsonify(data)
