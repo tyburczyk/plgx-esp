@@ -60,14 +60,12 @@ class PackAlerts(Resource):
     @ns.expect(parser)
     def post(self, query_id):
         args = self.parser.parse_args()
+        # TODO: consider query_id in the url to only be technique_id.query_id, without pack part in it
         # TODO: add some nice validation (after cleaning naming)
-        # TODO: can we make this better? There is no info on which query pack should be used...
-        # TODO: maybe just name pack always the same (without windows part in it)
-        # TODO: change _ to . in query_name (pack)
-        # query name in pack currently looks like this: "hunting-pack--9fff2972-2243-4cb3-a947-58f20fec17be__T1060_1"
-        technique_id, query_id = query_id.split('__')[1].split('_')
+        # query name in pack currently looks like this: "hunting-pack--9fff2972-2243-4cb3-a947-58f20fec17be--T1060.1"
+        query_id = query_id.split('--')[2]
         # query name in esp currently looks like this: "pack/eiq_xdr_windows/test_T1060.1"
-        query_name = f"pack/eiq_xdr_windows/test_{technique_id}.{query_id}"
+        query_name = f"pack/eiq_xdr_windows/test_{query_id}"
         results = ResultLog.query.filter(ResultLog.name == query_name)
         # TODO: use some node id + join it and not pk
         if args["host_identifier"]:
