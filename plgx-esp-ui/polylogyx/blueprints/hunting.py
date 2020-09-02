@@ -5,10 +5,11 @@ from flask import jsonify
 
 from .utils import *
 from polylogyx.utils import require_api_key
-from polylogyx.models import Alerts, Rule
+from polylogyx.models import Alerts, Rule, ResultLog
 
 
 ns = Namespace('hunting', description='Hunting related operations')
+
 
 @require_api_key
 @ns.route('/pack/<string:pack_id>/alerts', endpoint="pack_alerts")
@@ -43,5 +44,40 @@ class PackAlerts(Resource):
                 for alert in rule.alerts
             ] for rule in rules
         }
+
+        return jsonify(data)
+
+
+@require_api_key
+@ns.route('/query/<string:query_id>/results', endpoint="query_results")
+@ns.doc(params={'host_identifier': 'Host identifier of the Node', 'start_time': 'start time of alerted events', 'end_time': 'end time of alerted events'})
+class PackAlerts(Resource):
+    parser = requestparse(['host_identifier', 'start_time', 'end_time'],
+                          [str, datetime.datetime.fromtimestamp, datetime.datetime.fromtimestamp],
+                          ["host identifier of the node", "start time of alerted events", "end time of alerted events"],
+                          [False, False, False])
+
+    @ns.expect(parser)
+    def post(self, query_id):
+        args = self.parser.parse_args()
+        # TODO: add some nice validation (after cleaning naming)
+        # TODO: can we make this better? There is no info on which query pack should be used...
+        # TODO: maybe just name pack always the same (without windows part in it)
+        # TODO: change _ to . in query_name (pack)
+        # query name in pack currently looks like this: "hunting-pack--9fff2972-2243-4cb3-a947-58f20fec17be__T1060_1"
+        technique_id, query_id = query_id.split('__')[1].split('_')
+        # query name in esp currently looks like this: "pack/eiq_xdr_windows/test_T1060.1"
+        query_name = f"pack/eiq_xdr_windows/test_{technique_id}.{query_id}"
+        results = ResultLog.query.filter(ResultLog.name == query_name)
+        # TODO: use some node id + join it and not pk
+        if args["host_identifier"]:
+            results = results.filter(ResultLog.node_id == args["host_identifier"])
+        # TODO: probably timestamp is not of event occurence
+        if args["start_time"]:
+            rules = results.filter(ResultLog.timestamp >= args["start_time"])
+        if args["end_time"]:
+            rules = results.filter(ResultLog.timestamp <= args["end_time"])
+
+        data = [result.to_dict() for result in results.all()]
 
         return jsonify(data)
