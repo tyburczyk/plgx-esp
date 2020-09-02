@@ -65,7 +65,7 @@ class PackAlerts(Resource):
         # query name in pack currently looks like this: "hunting-pack--9fff2972-2243-4cb3-a947-58f20fec17be--T1060.1"
         query_id = query_id.split('--')[2]
         # query name in esp currently looks like this: "pack/eiq_xdr_windows/test_T1060.1"
-        query_name = f"pack/eiq_xdr_windows/test_{query_id}"
+        query_name = f"pack/hunting_queries/test_{query_id}"
         results = ResultLog.query.filter(ResultLog.name == query_name)
         # TODO: use some node id + join it and not pk
         if args["host_identifier"]:
