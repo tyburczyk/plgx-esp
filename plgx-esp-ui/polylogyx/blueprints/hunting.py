@@ -50,6 +50,33 @@ class PackAlerts(Resource):
 
 
 @require_api_key
+@ns.route('/pack/<string:pack_id>/<string:technique_id>/<int:query_id>/alerts', endpoint="pack_rule_alerts")
+@ns.doc(params={'host_identifier': 'Host identifier of the Node', 'start_time': 'start time of alerted events', 'end_time': 'end time of alerted events'})
+class PackAlertsForRule(Resource):
+    parser = requestparse(['host_identifier', 'start_time', 'end_time'],
+                          [str, datetime.datetime.fromtimestamp, datetime.datetime.fromtimestamp],
+                          ["host identifier of the node", "start time of alerted events", "end time of alerted events"],
+                          [False, False, False])
+
+    @ns.expect(parser)
+    def post(self, pack_id, technique_id, query_id):
+        args = self.parser.parse_args()
+        # TODO: rename in the pack:
+        rule_name = f"hunting-pack--{pack_id}--{technique_id}.{query_id}"
+        # rule = Rule.query.filter(Rule.name.startswith(pack_id)).filter(Rule)
+        alerts = Alerts.query.filter(Rule.name == rule_name)
+        # TODO: use some node id + join it and not pk
+        if args["host_identifier"]:
+            alerts = alerts.filter(Alerts.node_id == args["host_identifier"])
+        if args["start_time"]:
+            alerts = alerts.filter(Alerts.created_at >= args["start_time"])
+        if args["end_time"]:
+            alerts = alerts.filter(Alerts.created_at <= args["end_time"])
+
+        return jsonify([alert.to_dict() for alert in alerts])
+
+
+@require_api_key
 @ns.route('/query/<string:technique_id>/<int:query_id>/results', endpoint="query_results")
 @ns.doc(params={'host_identifier': 'Host identifier of the Node', 'start_time': 'start time of alerted events', 'end_time': 'end time of alerted events'})
 class QueryResults(Resource):
